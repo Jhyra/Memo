@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My APP</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+        <style>
+h1{
+  color: white;
+  font-family:forte;
+  }
+         body{
+         background:black
+         }
+     </style>
+   </head>
+<body>
+<div class="bg-dark text-white"><br>
+<a class="btn btn-primary" href="home1.html" role="button">Home</a>
+<a class="btn btn-primary" href="List.html" role="button">List</a>
+<br><h1><center>Create Memo</center></h1><br>
+</div>
+<br>
+<div class="tab tab-2">
+<div class="text-white">
+                 <center>
+			     Title :<br><input type="text" name="note" id="note"><br>
+				 Date :<br><input type="date" name="date" id="date"><br>
+				 Time :<br><input type="time" name="time" id="time">
+				 </center>
+</div>
+<form>
+<div class="container" style="width: 400px; height: 200px;">
+<div class="form-group">
+    <label for="exampleFormControlTextarea1"></label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea><br>
+	<center><button class="btn btn-primary" onclick="addHtmlTableRow();">Save</button>
+    <button class="btn btn-primary" onclick="removeSelectedRow();">Delete</button></center>
+  </div>
+  </div>
+</div>
+</form>
+
+
+ <script>
+		      
+			  var rindex,
+			      table = document.getElementById("table");
+			  
+			   function checkEmptyInput()
+			   {
+			     
+			       var isEmpty = false,
+				       note = document.getElementById("note").value;
+				       date = document.getElementById("date").value;
+				       time = document.getElementById("time").value;
+					   
+					if(note === ""){
+					   alert("Title Cannot be Empty");
+					   isEmpty = true;
+					}
+					   
+					else if(date === ""){
+					   alert("Date Cannot be Empty");
+					   isEmpty = true;
+					}
+					   
+					else if(time === ""){
+					   alert("Time Cannot be Empty");
+					   isEmpty = true;
+					}
+					return isEmpty;
+			   }
+		   
+			
+			function addHtmlTableRow()
+			{
+			    
+			   if(!checkEmptyInput()){
+			   var newRow = table.insertRow(table.length),
+				   cell1 = newRow.insertCell(0),
+				   cell2 = newRow.insertCell(1),
+				   cell3 = newRow.insertCell(2),
+				   note = document.getElementById("note").value,
+				   date = document.getElementById("date").value,
+				   time = document.getElementById("time").value;
+				 
+				  
+				cell1.innerHTML = note;
+				cell2.innerHTML = date;
+				cell3.innerHTML = time;
+				
+				selectedRowToInput();
+			}
+			}
+			
+			function selectedRowToInput()
+			{
+			    
+				for (var i = 1; i  < table.rows.length; i++)
+				{
+				     table.rows[i].onclick = function()
+					 {
+					 
+					   rIndex = this.rowIndex;
+					   document.getElementById("note").value = this.cells[0].innerHTML;
+					   document.getElementById("date").value = this.cells[1].innerHTML;
+					   document.getElementById("time").value = this.cells[2].innerHTML;
+					 };
+				}
+			}
+			selectedRowToInput();
+			
+			function editHtmlTbleSelectedRow()
+			{
+			    var note = document.getElementById("note").value,
+				    date = document.getElementById("date").value,
+					time = document.getElementById("time").value;
+					
+				if (!checkEmptyInput()){	
+					
+				table.rows[rIndex].cells[0].innerHTML = note;
+				table.rows[rIndex].cells[1].innerHTML = date;
+				table.rows[rIndex].cells[2].innerHTML = time;
+			  }
+			}
+			
+			function removeSelectedRow()
+			{
+			   table.deleteRow(rIndex);
+			   
+			   document.getElementById("note").value = "";
+			   document.getElementById("date").value = "";
+			   document.getElementById("time").value = "";
+			}
+			
+		</script>
+
+</body>
+</html>
